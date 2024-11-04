@@ -1,11 +1,13 @@
 from models.connection_options.connection import DBConnectionHandler
 from models.repository.passageiros_repository import PassageirosRepository
+from models.repository.funcionarios_repository import FuncionariosRepository
 
 db_handle = DBConnectionHandler()   
 db_handle.connect_to_db()
 db_connection = db_handle.get_db_connection()
 
 passageiros_repository = PassageirosRepository(db_connection)
+funcionarios_repository = FuncionariosRepository(db_connection)
 
 # passageiro = {
 #     "userId": "4",
@@ -149,4 +151,37 @@ passageiros_repository = PassageirosRepository(db_connection)
 # passageiros_repository.insert_document(passageiro)
 
 
-passageiros_repository.edit_many_increment({"nome": "Mario"}, 3)
+# passageiros_repository.edit_many_increment({"nome": "Mario"}, 3)
+
+# funcionario = {
+#     "userId": "1",
+#     "nome": "Eduardo",
+#     "email": "edurene@gmail.com",
+#     "data_registro": {
+#         "$date": "2024-11-04T19:23:00.000Z"
+#     }
+# }
+
+# funcionarios_repository.insert_document(funcionario)
+# funcionarios_repository.delete_registry({"nome": "Eduardo"})
+
+funcionarios = [
+    {"userId": "1",
+    "nome": "João",
+    "rg": "12.123.321-1",
+    "email": "joao@metrosp.com",
+    "data_registro": {
+        "$date": "2024-11-04T19:30:00.000Z"
+    },
+    },
+    {"userId": "2",
+    "nome": "Carlos",
+    "rg": "12.013.123-2",
+    "email": "carlos@metrosp.com",
+    "data_registro": {
+        "$date": "2024-10-18T19:00:00.000Z"
+    },
+    },
+]
+
+funcionarios_repository.insert_list_of_documents(funcionarios)
