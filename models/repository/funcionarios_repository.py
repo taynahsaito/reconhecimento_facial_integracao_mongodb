@@ -40,8 +40,8 @@ class FuncionariosRepository:
         collection = self.__db_connection.get_collection(self.__collection_name)
         data = collection.find(
             filter, 
-            {"userId": 1, "image_path": 1} # Opcoes de retorno
-        ).sort([("userId", 1)])
+            {"_id": 0} # Opcoes de retorno
+        ).sort([("_id", 1)])
 
         for elem in data: print(elem)
 
